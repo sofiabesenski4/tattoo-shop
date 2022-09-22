@@ -1,0 +1,32 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Appointments</h1>
+
+
+
+<%= month_calendar(events: @appointments) do |date, appointments| %>
+  <%= date %>
+
+  <% appointments.each do |appointment| %>
+    <div>
+      <%= appointment.name %>
+    </div>
+  <% end %>
+
+  
+<% end %>
+
+
+
+
+
+<div id="appointments">
+  <% @appointments.each do |appointment| %>
+    <%= render appointment %>
+    <p>
+      <%= link_to "Show this appointment", appointment %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New appointment", new_appointment_path %>

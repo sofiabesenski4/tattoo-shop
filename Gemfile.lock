@@ -354,6 +354,8 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     semantic_range (3.0.0)
+    simple_calendar (2.4.3)
+      rails (>= 3.0)
     solidus_api (3.2.2)
       jbuilder (~> 2.8)
       kaminari-activerecord (~> 1.1)
@@ -491,6 +493,7 @@ DEPENDENCIES
   rubocop-rspec (~> 2.0)
   sass-rails (>= 6)
   selenium-webdriver
+  simple_calendar (~> 2.4)
   solidus_api (~> 3.2)
   solidus_auth_devise
   solidus_backend (~> 3.2)

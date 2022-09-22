@@ -1,5 +1,11 @@
 <%= render 'hero' %>
 
+
+<%= month_calendar(attribute: :start_time, end_attribute: :end_time) do |date| %>
+  <%= date %>
+<% end %>
+
+
 <article>
   <% cache(cache_key_for_products) do %>
     <%= render 'products/products', products: @products %>

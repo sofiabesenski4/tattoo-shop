@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :appointments
   root to: 'home#index'
 
   devise_for(:user, {
@@ -64,6 +65,7 @@ Rails.application.routes.draw do
   get '/cart_link', to: 'store#cart_link', as: :cart_link
 end
 Rails.application.routes.draw do
+  resources :appointments
   # This line mounts Solidus's routes at the root of your application.
   # This means, any requests to URLs such as /products, will go to Spree::ProductsController.
   # If you would like to change where this engine is mounted, simply change the :at option to something different.
