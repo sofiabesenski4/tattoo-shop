@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_212245) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_06_212024) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -77,6 +77,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_212245) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
+  create_table "shifts", force: :cascade do |t|
+    t.integer "weekday", null: false
+    t.integer "start_time", default: 9, null: false
+    t.integer "end_time", default: 17, null: false
+    t.integer "spree_users_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["spree_users_id"], name: "index_shifts_on_spree_users_id"
   end
 
   create_table "spree_addresses", force: :cascade do |t|
