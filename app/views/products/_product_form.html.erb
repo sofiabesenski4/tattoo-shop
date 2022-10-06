@@ -19,6 +19,10 @@
 
   <%= render 'product_variants', product: product %>
 
+
+  <%= f.label :openings, "Openings" %> 
+  <%= f.select :openings,  @product.availability %>
+
   <% if product.price %>
     <%= render 'product_submit', product: product %>
   <% else %>

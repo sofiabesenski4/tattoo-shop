@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_204600) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_22_212245) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -480,6 +480,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_204600) do
     t.boolean "promotionable", default: true
     t.string "meta_title"
     t.datetime "discontinue_on", precision: nil
+    t.integer "appointments_id"
+    t.index ["appointments_id"], name: "index_spree_products_on_appointments_id"
     t.index ["available_on"], name: "index_spree_products_on_available_on"
     t.index ["deleted_at"], name: "index_spree_products_on_deleted_at"
     t.index ["name"], name: "index_spree_products_on_name"

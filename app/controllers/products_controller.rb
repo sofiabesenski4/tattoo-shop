@@ -14,6 +14,9 @@ class ProductsController < StoreController
   end
 
   def show
+    # If the product has appointments, show the appointment form:
+    #
+
     @variants = @product.
       variants_including_master.
       display_includes.
