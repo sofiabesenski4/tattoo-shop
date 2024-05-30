@@ -29,6 +29,7 @@ RSpec.describe 'Visiting Products', type: :system, inaccessible: true do
 
     it 'should not use the *_url helper to generate the product links' do
       visit root_path
+      # This seems to be flaking sometimes.
       expect(page).not_to have_xpath(".//a[@href='#{product_url(product, host: current_host)}']")
     end
 
