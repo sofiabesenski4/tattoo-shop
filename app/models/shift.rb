@@ -1,5 +1,6 @@
 class Shift < ApplicationRecord
-  validates :start_time_before_end_time
+  validate :start_time_before_end_time
+
   enum(:weekday, [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ])
 
 
