@@ -1,24 +1,35 @@
-# README
+# Tattoo Shop
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app intends to replace the tiring and burdensome process of booking, taking payments, and preserving details about tattoo appointments. 
 
-Things you may want to cover:
+## Main UX Flow
+* Let tattooers decide when they are accepting bookings/appointments.
+* Determine "Appointment" product availability from the tattooer's "shifts" which are not already booked by other "appointments".
+* Show customers the possible appointments.
+* Let them "checkout" with their desired "Appointment" product.
+* Accept payments (for now) through e-transfer.
+* Let tattooers "Accept" payment through the Solidus Admin, and confirm the appointment.
+* Ensure the accepted appointment modifies the availability for other customers.
 
-* Ruby version
+## Secondary Goals
+* Allow customers to upload reference photos/details for their appointments during checkout so the tattooer can view them.
 
-* System dependencies
+## Future Goals
+* Support multiple tattooers working in the same shop.
 
-* Configuration
 
-* Database creation
+# Tech Stack
+*  `solidus_core`
+* `solidus_stater_frontend`
+* SQLite database for now
 
-* Database initialization
+## Testing
+* We use RSpec as our testing framework, and Capybara for feature specs.
+* `solidus_starter_frontend` came with a lot of specs out of the box, but we might want to pull back on these a bit since they take a long time to run locally.
+* We don't have CI set up.
 
-* How to run the test suite
+to be continued...
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+
