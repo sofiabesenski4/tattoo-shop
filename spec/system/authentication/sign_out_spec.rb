@@ -21,6 +21,7 @@ RSpec.feature 'Sign Out', type: :system, js: true do
 
   scenario 'allow a signed in user to logout' do
     click_link 'My Account'
+    expect(page).to have_content(/My Orders/i)
     click_button 'Logout'
     visit root_path
     expect(page).to have_text 'LOGIN'
