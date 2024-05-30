@@ -285,6 +285,8 @@ RSpec.describe 'Checkout', :js, type: :system, inaccessible: true do
     it "prevents double clicking the payment button on checkout", js: true do
       visit checkout_state_path(:payment)
 
+      # FIXME: the page is not loading fast enough to find this element.
+      sleep(0.5)
       # prevent form submit to verify button is disabled
       page.execute_script("document.getElementById('checkout_form_payment').onsubmit = function(){return false;}")
 
@@ -297,6 +299,8 @@ RSpec.describe 'Checkout', :js, type: :system, inaccessible: true do
       order.payments << create(:payment)
       visit checkout_state_path(:confirm)
 
+      # FIXME: The page is not loading fast enough to find this element.
+      sleep(0.5)
       # prevent form submit to verify button is disabled
       page.execute_script("document.getElementById('checkout_form_confirm').onsubmit = function(){return false;}")
 

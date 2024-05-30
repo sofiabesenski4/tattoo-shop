@@ -17,6 +17,9 @@ RSpec.describe 'Cart', type: :system, inaccessible: true do
     click_link "RoR Mug"
     click_button "add-to-cart-button"
 
+    # FIXME: This isn't loading fast enough.
+    sleep(0.5)
+
     # prevent form submit to verify button is disabled
     page.execute_script("document.getElementById('update-cart').onsubmit = function(){return false;}")
 
