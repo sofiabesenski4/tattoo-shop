@@ -3,12 +3,7 @@ module ProductDecorator
 
   class_methods do
     def appointment
-      Spree::Product.find_or_create_by(slug: "appointment") do |p|
-        p.shipping_category = Spree::ShippingCategory.default
-        p.name = "Appointment"
-        p.price = 99
-        p.available_on = Date.yesterday
-      end
+      Spree::Product.find_by!(slug: "appointment")
     end
   end
 
