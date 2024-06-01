@@ -33,3 +33,9 @@ to be continued...
 
 
 
+## Notes
+
+Having troubles installing this on my M1 Mac
+
+Had to run  `export NODE_OPTIONS=--openssl-legacy-provider` in my shell to get webpack to run.
+

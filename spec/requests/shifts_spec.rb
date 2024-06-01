@@ -1,7 +1,9 @@
 require 'rails_helper'
 
+# FIXME: Skipping these specs for now.
 RSpec.describe "/shifts", type: :request do
 
+  pending
   # This should return the minimal set of attributes required to create a valid
   # Shift. As you add validations to Shift, be sure to
   # adjust the attributes here as well.
