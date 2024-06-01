@@ -8,6 +8,13 @@ Spree.config do |config|
   # Core:
   # Default currency for new sites
   config.currency = "CAD"
+  config.default_country_iso = "CA"
+
+  # Required to set the defaults for stock Solidus' pricing options.
+  config.admin_vat_country_iso = "CA"
+
+  # If we want to change this.
+  # config.variant_price_selector_class = "PricingOptions"
 
   # from address for transactional emails
   config.mails_from = "store@example.com"
@@ -17,7 +24,6 @@ Spree.config do |config|
 
   # We don't need master prices.
   config.require_master_price = false
-  #
   config.show_variant_full_price = true
 
   # When set, product caches are only invalidated when they fall below or rise
