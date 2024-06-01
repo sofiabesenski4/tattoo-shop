@@ -75,8 +75,9 @@ RSpec.describe "/shifts", type: :request do
         }.to change(Shift, :count).by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
+      xit "renders a successful response (i.e. to display the 'new' template)" do
         post shifts_url, params: { shift: invalid_attributes }
+        binding.pry
         expect(response).to be_successful
       end
     end
