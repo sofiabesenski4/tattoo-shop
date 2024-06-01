@@ -17,7 +17,6 @@ tattoo_time = Spree::Product.create!(
   slug: "tattoo-time",
   shipping_category: digital_shipping_category,
   name: "Tattoo Time",
-  price: 120,
   available_on: Date.yesterday,
   option_types: [duration_option_type])
 
@@ -46,7 +45,6 @@ tattoo_time = Spree::Product.create!(
     country_iso: "CA"
   )
 
-  binding.pry
 end
 
 
