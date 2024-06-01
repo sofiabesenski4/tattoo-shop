@@ -21,7 +21,8 @@ class ShiftsController < ApplicationController
 
   # POST /shifts or /shifts.json
   def create
-    @shift = Shift.new(shift_params)
+    @shift = Shift.new(shift_params.transform_values(&:to_i))
+
 
     respond_to do |format|
       if @shift.save
