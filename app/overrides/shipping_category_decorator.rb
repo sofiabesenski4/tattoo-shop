@@ -2,8 +2,8 @@ module ShippingCategoryDecorator
   extend ActiveSupport::Concern
 
   class_methods do
-    def default
-      Spree::ShippingCategory.find_or_create_by(name: "default")
+    def digital
+      Spree::ShippingCategory.find_or_create_by(code: "DIGITAL")
     end
   end
 

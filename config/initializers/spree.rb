@@ -7,13 +7,18 @@ Spree.load_defaults '3.2.2'
 Spree.config do |config|
   # Core:
   # Default currency for new sites
-  config.currency = "USD"
+  config.currency = "CAD"
 
   # from address for transactional emails
   config.mails_from = "store@example.com"
 
   # Uncomment to stop tracking inventory levels in the application
-  # config.track_inventory_levels = false
+  config.track_inventory_levels = false
+
+  # We don't need master prices.
+  config.require_master_price = false
+  #
+  config.show_variant_full_price = true
 
   # When set, product caches are only invalidated when they fall below or rise
   # above the inventory_cache_threshold that is set. Default is to invalidate cache on
