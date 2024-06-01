@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 require "feature_helper"
 
 RSpec.feature "Booking an Appointment" do
   before do
-    # Init appointment product.
-    Spree::Product.appointment
+    create(:product, slug: "appointment")
   end
 
   it "doesn't blow up immediately" do
