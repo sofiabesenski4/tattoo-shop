@@ -4,7 +4,7 @@ This app intends to replace the tiring and burdensome process of booking, taking
 
 ## Main UX Flow
 * Let tattooers decide when they are accepting bookings/appointments.
-* Determine "Appointment" product availability from the tattooer's "shifts" which are not already booked by other "appointments".
+* Determine "Appointment" product availability from the tattooer's "Appointments"..
 * Show customers the possible appointments.
 * Let them "checkout" with their desired "Appointment" product.
 * Accept payments (for now) through e-transfer.
@@ -32,4 +32,10 @@ to be continued...
 
 
 
+
+## Notes
+
+Having troubles installing this on my M1 Mac
+
+Had to run  `export NODE_OPTIONS=--openssl-legacy-provider` in my shell to get webpack to run.
 

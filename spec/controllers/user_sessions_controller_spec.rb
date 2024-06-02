@@ -109,7 +109,7 @@ RSpec.describe UserSessionsController, type: :controller do
         let(:format) { :js }
         it "returns json with the error" do
           subject
-          parsed = ActiveSupport::JSON.decode(response.body)
+          parsed = JSON.parse(response.body)
           expect(parsed).to have_key("error")
         end
       end
