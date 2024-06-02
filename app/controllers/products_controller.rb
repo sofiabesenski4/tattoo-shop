@@ -9,8 +9,6 @@ class ProductsController < StoreController
   respond_to :html
 
   def index
-    binding.pry
-    # FIXME: I cannot get "CA" to show up in the default pricing options, and my products are not showing up in the listing.
     @searcher = build_searcher(params.merge(include_images: true))
     @products = @searcher.retrieve_products
   end
