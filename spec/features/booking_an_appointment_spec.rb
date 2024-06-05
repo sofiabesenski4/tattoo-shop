@@ -2,15 +2,21 @@
 
 require "feature_helper"
 
-RSpec.feature "Booking an Appointment" do
+RSpec.feature "Booking an Appointment", js: true do
   before do
-    create(:product, slug: "appointment")
+    create(:product, slug: "appointment", bookable: true)
   end
 
   it "doesn't blow up immediately" do
     visit "/products/appointment"
 
-    select "2099-01-01 13:00", from: "Openings"
+    expect(page).to have_content /Start Time/i
+
+    fill_in "appointment_start_time", with: DateTime.current
+
+    fill_in "appointment_end_time", with: 3.hours.from_now
+
+    # TODO: Complete checkout
   end
 end
 

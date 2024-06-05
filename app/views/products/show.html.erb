@@ -11,7 +11,11 @@
       <div class="product-page__info">
         <%= render 'product_header', product: @product %>
         <%= render 'product_promotions', product: @product %>
-        <%= render 'product_form', product: @product %>
+        <% if @product.bookable? %>
+          <%= render 'bookable_product_form', product: @product %>
+        <% else %>
+          <%= render 'product_form', product: @product %>
+        <% end %>
         <%= render 'product_taxons', product: @product %>
       </div>
     </div>
