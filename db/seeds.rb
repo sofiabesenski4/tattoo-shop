@@ -9,37 +9,46 @@
 Spree::Core::Engine.load_seed if defined?(Spree::Core)
 Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
 
+
+Spree::User.find_or_create_by(email: "admin@example.com") do |admin|
+  admin.password = "test123"
+end
+
+
 digital_shipping_category = Spree::ShippingCategory.create!(name: "Digital")
 
-duration_option_type = Spree::OptionType.create!(name: "duration", presentation: "Duration (min)")
+duration_option_type = Spree::OptionType.find_or_create_by(name: "duration", presentation: "Duration (min)")
 
-tattoo_time = Spree::Product.create!(
+tattoo_time = Spree::Product.find_or_create_by(
   slug: "tattoo-time",
   shipping_category: digital_shipping_category,
   name: "Tattoo Time",
-  price: 120,
-  available_on: Date.yesterday,
-  option_types: [duration_option_type])
+  available_on: Date.yesterday
+) do |product|
+  product.price = 120
+  product.option_types = [duration_option_type]
+end
 
 (2..6).each do |index|
   minutes = index * 30
 
-  duration_option_value = Spree::OptionValue.create!(
+  duration_option_value = Spree::OptionValue.find_or_create_by!(
     name: "#{minutes}",
     presentation: "#{minutes}",
     option_type: duration_option_type
   )
 
-  variant = Spree::Variant.create!(
-    product: tattoo_time,
-    sku: "TATTOO-#{minutes}",
-    shipping_category: digital_shipping_category,
-    option_values: [duration_option_value],
-    prices: []
-  )
+  variant = Spree::Variant.find_or_create_by(
+    sku: "TATTOO-#{minutes}"
+  ) do |v|
+    v.shipping_category = digital_shipping_category
+    v.prices = []
+    v.option_values = [duration_option_value]
+    v.product = tattoo_time
+  end
 
   # This ends up being $120/hr
-  Spree::Price.create!(
+  Spree::Price.find_or_create_by(
     variant: variant,
     amount: (2 * minutes).to_f,
     currency: "CAD",
@@ -48,18 +57,20 @@ tattoo_time = Spree::Product.create!(
 end
 
 
-flat_rate_shipping_calculator = Spree::Calculator::Shipping::FlatPercentItemTotal.create(
+flat_rate_shipping_calculator = Spree::Calculator::Shipping::FlatPercentItemTotal.find_or_create_by(
   type: "Spree::Calculator::Shipping::FlatPercentItemTotal",
   calculable_type: "Spree::ShippingMethod",
   preferences: {:flat_percent=>0.0}
 )
 
-Spree::ShippingMethod.create!(
+Spree::ShippingMethod.find_or_create_by(
   name: "Digital",
   code: "DIGITAL",
-  zones: Spree::Zone.all,
-  shipping_categories: Spree::ShippingCategory.all,
-  calculator: flat_rate_shipping_calculator)
+  calculator: flat_rate_shipping_calculator
+) do |sm|
+  sm.zones = Spree::Zone.all
+  sm.shipping_categories = Spree::ShippingCategory.all
+end
 
 # Replace this with an E-Transfer Payment Method
 Spree::PaymentMethod.find_or_create_by(
