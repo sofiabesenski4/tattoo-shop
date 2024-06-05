@@ -12,6 +12,7 @@ Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
 
 Spree::User.find_or_create_by(email: "admin@example.com") do |admin|
   admin.password = "test123"
+  admin.roles = [Spree::Role.find_by(name: "admin")]
 end
 
 
