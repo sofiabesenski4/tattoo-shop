@@ -35,6 +35,9 @@ Spree.config do |config|
   config.image_attachment_module = 'Spree::Image::ActiveStorageAttachment'
   config.taxon_attachment_module = 'Spree::Taxon::ActiveStorageAttachment'
 
+  # We create Appointments alongside LineItems.
+  Spree::PermittedAttributes.line_item_attributes << {appointment_attributes: [:name, :start_time, :end_time]}
+
   # Defaults
   # Permission Sets:
 

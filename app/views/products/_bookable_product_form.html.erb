@@ -28,6 +28,7 @@
       </p>
     </div>
   <% end %>
+  
+  <%= render "appointments/fields", appointment: Appointment.new, f: f %>
 <% end %>
 
-<%= render "appointments/form", appointment: Appointment.new %>

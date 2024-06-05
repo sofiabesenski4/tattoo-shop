@@ -14,13 +14,14 @@ class OrderContentsController < StoreController
 
     variant  = Spree::Variant.find(params[:variant_id])
     quantity = params[:quantity].present? ? params[:quantity].to_i : 1
+    appointment = params[:order][:appointment]
 
     # 2,147,483,647 is crazy. See issue https://github.com/spree/spree/issues/2695.
     if !quantity.between?(1, 2_147_483_647)
       @order.errors.add(:base, t('spree.please_enter_reasonable_quantity'))
     else
       begin
-        @line_item = @order.contents.add(variant, quantity)
+        @line_item = @order.contents.add(variant, quantity, appointment_attributes: appointment)
       rescue ActiveRecord::RecordInvalid => error
         @order.errors.add(:base, error.record.errors.full_messages.join(", "))
       end
@@ -43,5 +44,9 @@ class OrderContentsController < StoreController
 
   def store_guest_token
     cookies.permanent.signed[:guest_token] = params[:token] if params[:token]
+  end
+
+  def permitted_appointment_attributes
+    params.require(:order).permit(appointment: [:start_time, :end_time, :name])
   end
 end
