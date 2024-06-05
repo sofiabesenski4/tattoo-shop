@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_01_183233) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_05_175136) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -256,6 +256,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_01_183233) do
     t.decimal "additional_tax_total", precision: 10, scale: 2, default: "0.0"
     t.decimal "promo_total", precision: 10, scale: 2, default: "0.0"
     t.decimal "included_tax_total", precision: 10, scale: 2, default: "0.0", null: false
+    t.integer "appointments_id"
+    t.index ["appointments_id"], name: "index_spree_line_items_on_appointments_id"
     t.index ["order_id"], name: "index_spree_line_items_on_order_id"
     t.index ["variant_id"], name: "index_spree_line_items_on_variant_id"
   end
@@ -480,8 +482,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_01_183233) do
     t.boolean "promotionable", default: true
     t.string "meta_title"
     t.datetime "discontinue_on", precision: nil
-    t.integer "appointments_id"
-    t.index ["appointments_id"], name: "index_spree_products_on_appointments_id"
     t.index ["available_on"], name: "index_spree_products_on_available_on"
     t.index ["deleted_at"], name: "index_spree_products_on_deleted_at"
     t.index ["name"], name: "index_spree_products_on_name"
