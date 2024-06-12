@@ -24,7 +24,8 @@ tattoo_time = Spree::Product.find_or_create_by(
   slug: "tattoo-time",
   shipping_category: digital_shipping_category,
   name: "Tattoo Time",
-  available_on: Date.yesterday
+  available_on: Date.yesterday,
+  bookable: true
 ) do |product|
   product.price = 120
   product.option_types = [duration_option_type]

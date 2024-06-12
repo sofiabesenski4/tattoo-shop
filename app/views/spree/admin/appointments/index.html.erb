@@ -1,0 +1,86 @@
+<% admin_layout "full-width" %>
+
+<% admin_breadcrumb(plural_resource_name(Appointment)) %>
+
+
+<% content_for :table_filter do %>
+  <div data-hook="admin_appointments_sidebar">
+    <%= search_form_for [:admin, @search] do |f| %>
+        <%- locals = {f: f} %>
+        <div class="row" data-hook="admin_appointments_index_search">
+          <div class="col-6">
+            <div class="field">
+              <%= f.label :name_cont, Appointment.human_attribute_name(:name) %>
+              <%= f.text_field :name_cont, size: 15 %>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="field">
+            </div>
+          </div>
+
+          <div class="col-2">
+            <div class="field checkbox">
+              <label>
+                <%= f.check_box :with_discarded, { checked: params[:q][:with_discarded] == 'true', class: 'js-with-discarded-input' }, 'true', 'false' %>
+                <%= t('spree.show_deleted') %>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions filter-actions" data-hook="admin_appointments_index_search_buttons">
+          <%= button_tag t('spree.search'), class: 'btn btn-primary' %>
+        </div>
+    <% end %>
+  </div>
+<% end %>
+
+<div id="new_appointment_wrapper" data-hook></div>
+
+<%#= paginate @collection, theme: "solidus_admin" %>
+
+<% if @collection.any? %>
+  <table class="index" id="listing_appointments">
+    <colgroup>
+       <col style="width: 15%;">
+       <col style="width: 5%;">
+       <col style="width: 50%;">
+       <col style="width: 15%;">
+       <col style="width: 15%;">
+    </colgroup>
+    <thead>
+      <tr data-hook="admin_appointments_index_headers">
+        <th><%= sort_link @search,:name, Appointment.human_attribute_name(:name), { default_order: "desc" }, {title: 'admin_appointments_listing_name_title'} %></th>
+        <th><%= ::Appointment.human_attribute_name(:start_time) %></th>
+        <th><%= ::Appointment.human_attribute_name(:end_time) %></th>
+        <th data-hook="admin_appointments_index_header_actions" class="actions"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% @collection.each do |appointment| %>
+          <tr <%== "style='color: red;'" if appointment.deleted? %> id="<%= spree_dom_id appointment %>" data-hook="admin_appointments_index_rows">
+            <td><%= appointment.name %></td>
+            <td><%= appointment.start_time %></td>
+            <td><%= appointment.end_time %></td>
+            <td><%= link_to appointment.try(:name), edit_admin_appointment_path(appointment) %></td>
+            <td class="actions" data-hook="admin_appointments_index_row_actions">
+              <%= link_to_edit appointment, no_text: true, class: 'edit' if can?(:edit, appointment) && !appointment.deleted? %>
+              <%= link_to_delete appointment, no_text: true if can?(:destroy, appointment) && !appointment.deleted? %>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="no-objects-found">
+    <%= render 'spree/admin/shared/no_objects_found',
+                  resource: Appointment,
+                  new_resource_url: new_object_url %>
+  </div>
+<% end %>
+
+<%#= paginate @collection, theme: "solidus_admin" %>
+

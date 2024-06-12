@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_05_180658) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_06_190559) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -64,6 +64,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_05_180658) do
     t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_appointments_on_deleted_at"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -256,8 +258,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_05_180658) do
     t.decimal "additional_tax_total", precision: 10, scale: 2, default: "0.0"
     t.decimal "promo_total", precision: 10, scale: 2, default: "0.0"
     t.decimal "included_tax_total", precision: 10, scale: 2, default: "0.0", null: false
-    t.integer "appointments_id"
-    t.index ["appointments_id"], name: "index_spree_line_items_on_appointments_id"
+    t.integer "appointment_id"
+    t.index ["appointment_id"], name: "index_spree_line_items_on_appointment_id"
     t.index ["order_id"], name: "index_spree_line_items_on_order_id"
     t.index ["variant_id"], name: "index_spree_line_items_on_variant_id"
   end
