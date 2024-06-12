@@ -8,9 +8,8 @@ RSpec.feature "Booking an Appointment", js: true do
     create(:product, slug: "appointment", bookable: true)
   end
 
-  it "doesn't blow up immediately" do
+  it "creates an appointment when the user adds a bookable product to their cart" do
     visit "/products/appointment"
-
 
     expect(page).to have_content /Start Time/i
 
